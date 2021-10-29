@@ -1,0 +1,30 @@
+import { Document, SchemaDefinition, Schema } from 'mongoose';
+
+export interface IBase extends Document {
+  _id: string,
+  is_deleted: boolean,
+  create_by: string,
+  updated_by: string,
+  created_at: Date,
+  updated_at: Date,
+};
+
+export function SchemaBase(schema: SchemaDefinition) {
+  const defaultSchema: SchemaDefinition = {
+    is_deleted: {
+      type: Boolean,
+      default: false,
+    },
+    created_by: {
+      type: String
+    },
+    updated_by: {
+        type: String
+    }
+  };
+
+  return {
+    ...schema,
+    ...defaultSchema,
+  };
+}
