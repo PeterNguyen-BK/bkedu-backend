@@ -4,5 +4,5 @@ const classSchemaName = 'Class';
 
 export const schemaName = {
   userSchemaName,
-  classSchemaName
-}
+  classSchemaName,
+};
