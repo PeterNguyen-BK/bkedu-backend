@@ -4,6 +4,7 @@ import { UserRoute } from './Student/student.route';
 
 export class CombineRoute {
   private authRoute: AuthRoute = new AuthRoute();
+
   private userRoute: UserRoute = new UserRoute();
 
   public start(app: Application) {

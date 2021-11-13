@@ -23,3 +23,8 @@ export enum ErrorResponseCode {
   NOT_FOUND = 404,
   INTERNAL_SERVER_ERROR = 500,
 }
+
+export enum QuestType {
+  MULTICHOICE = 'multi-choice',
+  ESSAY = 'essay',
+}

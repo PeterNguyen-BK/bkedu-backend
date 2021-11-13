@@ -9,18 +9,18 @@ export class UserController {
   public getAllUsers = async (req: Request, res: Response) => {
     try {
       const result = await this.userService.getAll();
-      successHandler(req, res, result, "Get Successfully", 200);
-    } catch(error) {
-      errorHandler(req, res, error, 500)
+      successHandler(req, res, result, 'Get Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error, 500);
     }
-  }
+  };
 
   public getUser = async (req: Request, res: Response) => {
     try {
       const result = await this.userService.getOne();
-      successHandler(req, res, result, "Get Successfully", 200);
-    } catch(error) {
-      errorHandler(req, res, error, 500)
+      successHandler(req, res, result, 'Get Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error, 500);
     }
-  }
+  };
 }

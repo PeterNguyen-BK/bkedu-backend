@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { IBase, schemaBase } from './base.entity';
 import { Status, UserRole } from '@src/utils/constants';
-import { schemaName } from './schemaName.entity';
+import { schemaName } from './schemaName';
 
 export interface IUser extends IBase {
   first_name: string;
@@ -34,10 +34,6 @@ const userSchema = new Schema(
     },
     phone_number: {
       type: String,
-    },
-    role: {
-      type: UserRole,
-      default: UserRole.student,
     },
     status: {
       type: Status,

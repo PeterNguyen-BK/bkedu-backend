@@ -16,8 +16,7 @@ export abstract class BaseRepository<T> {
         is_deleted: false,
       };
       const check = await this.entity.find(finalFilter);
-      if (check.length > 0)
-        throw new Error('Type has been existed. Please enter type again');
+      if (check.length > 0) throw new Error('Type has been existed. Please enter type again');
       const newItem = new this.entity(data);
       await newItem.save();
       return newItem;
@@ -46,8 +45,7 @@ export abstract class BaseRepository<T> {
         is_deleted: false,
       };
       const item = await this.entity.findOne(finalFilter);
-      if (!item)
-        throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
+      if (!item) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return item;
     } catch (error: any) {
       throw new Error(error);
@@ -60,13 +58,8 @@ export abstract class BaseRepository<T> {
         ...filter,
         is_deleted: false,
       };
-      const updatedItem = await this.entity.findOneAndUpdate(
-        finalFilter,
-        data,
-        { new: true }
-      );
-      if (!updatedItem)
-        throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
+      const updatedItem = await this.entity.findOneAndUpdate(finalFilter, data, { new: true });
+      if (!updatedItem) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return updatedItem;
     } catch (error: any) {
       throw new Error(error);
@@ -82,13 +75,8 @@ export abstract class BaseRepository<T> {
       const data: object = {
         is_deleted: true,
       };
-      const deletedItem = await this.entity.findOneAndUpdate(
-        finalFilter,
-        data,
-        { new: true }
-      );
-      if (!deletedItem)
-        throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
+      const deletedItem = await this.entity.findOneAndUpdate(finalFilter, data, { new: true });
+      if (!deletedItem) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return deletedItem;
     } catch (error: any) {
       throw new Error(error);

@@ -1,10 +1,11 @@
 import { model, Schema } from 'mongoose';
 import { IBase, schemaBase } from './base.entity';
-import { schemaName } from './schemaName.entity';
+import { schemaName } from './schemaName';
 
 export interface IClass extends IBase {
-  name: string,
-  num_of_students: number,
+  name: string;
+  num_of_students: number;
+  form_teacher: string;
 }
 
 const classSchema = new Schema(
@@ -14,7 +15,11 @@ const classSchema = new Schema(
     },
     num_of_students: {
       type: Number,
-    }
+    },
+    form_teacher: {
+      type: Schema.Types.ObjectId,
+      ref: 'Teacher',
+    },
   }),
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },

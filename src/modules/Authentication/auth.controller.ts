@@ -2,10 +2,7 @@ import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import User from '@src/common/entity/user.entity';
 import { ILoginUser } from './auth.model';
-import {
-  successHandler,
-  errorHandler,
-} from '@src/common/services/response.service';
+import { successHandler, errorHandler } from '@src/common/services/response.service';
 
 export class AuthController {
   private authService: AuthService = new AuthService(User);

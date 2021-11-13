@@ -1,12 +1,6 @@
 import { Request, Response } from 'express';
 
-export const successHandler = (
-  req: Request,
-  res: Response,
-  data: any,
-  message: string,
-  code?: any
-) => {
+export const successHandler = (req: Request, res: Response, data: any, message: string, code?: any) => {
   if (!res.headersSent) {
     res.status(code || 200).json({
       success: true,
@@ -17,12 +11,7 @@ export const successHandler = (
   }
 };
 
-export const errorHandler = (
-  req: Request,
-  res: Response,
-  error: any,
-  code?: any
-) => {
+export const errorHandler = (req: Request, res: Response, error: any, code?: any) => {
   let returnCode;
   let message;
   if (typeof error !== 'string') {

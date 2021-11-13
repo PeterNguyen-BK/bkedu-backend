@@ -23,7 +23,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'off',
+        endOfLine: 'auto',
       },
     ],
     'func-names': ['error', 'never'],
@@ -36,12 +36,19 @@ module.exports = {
         newIsCapExceptions: ['entity'],
       },
     ],
+    indent: [
+      'error',
+      2,
+      {
+        MemberExpression: 1,
+      },
+    ],
     'no-console': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
-    'dot-location': ['error', 'property'],
+    'dot-location': [2, 'property'],
     'linebreak-style': 'off',
     'import/order': [
       'error',

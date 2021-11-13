@@ -19,16 +19,8 @@ export class AuthService extends BaseRepository<IUser> {
       const check = await bcrypt.compare(data.password, (<IUser>user).password);
       if (check) {
         const { password, ...payload } = <IUser>user;
-        const accessToken = jwt.sign(
-          payload,
-          `${process.env.ACCESS_TOKEN_SECRET}`,
-          { expiresIn: '1h' }
-        );
-        const refreshToken = jwt.sign(
-          payload,
-          `${process.env.REFRESH_TOKEN_SECRET}`,
-          { expiresIn: '7d' }
-        );
+        const accessToken = jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '1h' });
+        const refreshToken = jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, { expiresIn: '7d' });
         return {
           access_token: accessToken,
           refresh_token: refreshToken,
