@@ -3,4 +3,6 @@ import { IBase, schemaBase } from './base.entity';
 import { schemaName } from './schemaName';
 import User from './user.entity';
 
-export type ITeacher = IBase;
+const teacherSchema = new Schema(schemaBase());
+
+export default User.discriminator(schemaName.teacherSchemaName, teacherSchema);

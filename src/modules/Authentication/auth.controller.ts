@@ -12,7 +12,7 @@ export class AuthController {
       const data: ILoginUser = req.body;
       const tokens = await this.authService.login(data);
       successHandler(req, res, tokens, 'Create New User', 200);
-    } catch (error: any) {
+    } catch (error) {
       errorHandler(req, res, error, 400);
     }
   }
@@ -24,7 +24,7 @@ export class AuthController {
       };
       const newUser = await this.authService.create(req.body, filter);
       successHandler(req, res, newUser, 'Create New User', 204);
-    } catch (error: any) {
+    } catch (error) {
       errorHandler(req, res, error, 400);
     }
   }

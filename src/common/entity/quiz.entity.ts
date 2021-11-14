@@ -1,11 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import { IBase, schemaBase } from './base.entity';
 import { schemaName } from './schemaName';
 
 export interface IQuiz extends IBase {
   time: string;
   title: string;
-  questionId: [string];
+  question_id: [string];
 }
 
 const quizSchema = new Schema(
@@ -18,7 +18,7 @@ const quizSchema = new Schema(
       type: String,
       required: true,
     },
-    questionId: {
+    question_id: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'Question',

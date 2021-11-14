@@ -5,16 +5,21 @@ import { schemaName } from './schemaName';
 
 export interface IOption {
   _id: string;
-  answer: string;
-  isCorrect: boolean;
-  isSelected?: boolean;
+  option: string;
+  is_correct: boolean;
+  is_selected?: boolean;
+}
+
+export interface IAnswer {
+  correct_answer: string;
+  option: string;
 }
 
 export interface IQuest extends IBase {
   rating: number;
   type: QuestType;
   quiz: string;
-  options: [IOption] | string;
+  answer: [IOption] | IAnswer;
 }
 
 const questionSchema = new Schema(
@@ -32,7 +37,7 @@ const questionSchema = new Schema(
       type: String,
       required: true,
     },
-    options: Schema.Types.Mixed,
+    answer: Schema.Types.Mixed,
   }),
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );

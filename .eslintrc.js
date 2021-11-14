@@ -15,7 +15,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 13,
+    ecmaVersion: 6,
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],
@@ -43,6 +43,20 @@ module.exports = {
         MemberExpression: 1,
       },
     ],
+    'no-underscore-dangle': [
+      2,
+      {
+        allow: ['_id'],
+      },
+    ],
+    'no-param-reassign': [
+      'error',
+      {
+        props: false,
+      },
+    ],
+    'no-plusplus': 'off',
+    'one-var': 'off',
     'no-console': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
@@ -50,6 +64,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'dot-location': [2, 'property'],
     'linebreak-style': 'off',
+    'array-callback-return': 'off',
     'import/order': [
       'error',
       {

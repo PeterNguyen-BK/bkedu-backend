@@ -16,4 +16,4 @@ const studentSchema = new Schema(
   })
 );
 
-User.discriminator(schemaName.studentSchemaName, studentSchema);
+export default User.discriminator(schemaName.studentSchemaName, studentSchema);

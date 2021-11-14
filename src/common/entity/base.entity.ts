@@ -9,7 +9,7 @@ export interface IBase extends Document {
   updated_at: Date;
 }
 
-export function schemaBase(schema: SchemaDefinition) {
+export function schemaBase(schema: SchemaDefinition = {}) {
   const defaultSchema: SchemaDefinition = {
     is_deleted: {
       type: Boolean,
