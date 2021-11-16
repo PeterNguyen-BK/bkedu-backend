@@ -14,12 +14,11 @@ mongoose
     const combineRoute = new CombineRoute();
     combineRoute.start(app);
 
-    const port = process.env.PORT || 5000;
-
     app.get('/', async (req: Request, res: Response) => {
       res.send('BK Education');
     });
 
+    const port = process.env.PORT || 5000;
     app.listen(port, () => {
       console.log(`Server is running on ${port}`);
     });
