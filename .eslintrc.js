@@ -65,6 +65,7 @@ module.exports = {
     'dot-location': [2, 'property'],
     'linebreak-style': 'off',
     'array-callback-return': 'off',
+    'no-useless-catch': 'off',
     'import/order': [
       'error',
       {

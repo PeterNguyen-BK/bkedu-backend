@@ -27,8 +27,8 @@ export class AuthService extends BaseRepository<IUser> {
         };
       }
       throw new Error('Wrong password');
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 }

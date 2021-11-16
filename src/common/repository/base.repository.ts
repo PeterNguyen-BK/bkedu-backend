@@ -16,12 +16,12 @@ export abstract class BaseRepository<T> {
         is_deleted: false,
       };
       const check = await this.entity.find(finalFilter);
-      if (check.length > 0) throw new Error('Type has been existed. Please enter type again');
+      if (check.length > 0) throw new AppError('Type has been existed. Please enter type again', 400);
       const newItem = new this.entity(data);
       await newItem.save();
       return newItem;
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -33,8 +33,8 @@ export abstract class BaseRepository<T> {
       };
       const allItem = await this.entity.find(finalFilter);
       return allItem;
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -47,8 +47,8 @@ export abstract class BaseRepository<T> {
       const item = await this.entity.findOne(finalFilter);
       if (!item) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return item;
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -61,8 +61,8 @@ export abstract class BaseRepository<T> {
       const updatedItem = await this.entity.findOneAndUpdate(finalFilter, data, { new: true });
       if (!updatedItem) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return updatedItem;
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -78,8 +78,8 @@ export abstract class BaseRepository<T> {
       const deletedItem = await this.entity.findOneAndUpdate(finalFilter, data, { new: true });
       if (!deletedItem) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return deletedItem;
-    } catch (error: any) {
-      throw new Error(error);
+    } catch (error) {
+      throw error;
     }
   }
 }
