@@ -3,7 +3,7 @@ import { Document, SchemaDefinition } from 'mongoose';
 export interface IBase extends Document {
   _id: string;
   is_deleted: boolean;
-  create_by: string;
+  created_by: string;
   updated_by: string;
   created_at: Date;
   updated_at: Date;

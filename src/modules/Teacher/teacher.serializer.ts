@@ -1,6 +1,6 @@
-import { IStudentResponse } from './student.model';
+import { ITeacherResponse } from './teacher.model';
 
-export function serializeStudent(model: any): IStudentResponse | object {
+export function serializeTeacher(model: any): ITeacherResponse | object {
   if (model) {
     return {
       _id: model._id,
@@ -12,7 +12,6 @@ export function serializeStudent(model: any): IStudentResponse | object {
       phone_number: model.phone_number,
       status: model.status,
       is_first_login: model.is_first_login,
-      class: model.class,
       created_at: model.created_at,
       updated_at: model.updated_at,
       created_by: model.created_by,

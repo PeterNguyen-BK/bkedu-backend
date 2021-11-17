@@ -18,7 +18,7 @@ export interface IAnswer {
 export interface IQuest extends IBase {
   rating: number;
   type: QuestType;
-  quiz: string;
+  question: string;
   answer: [IOption] | IAnswer;
 }
 

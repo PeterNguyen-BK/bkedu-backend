@@ -4,8 +4,8 @@ export enum Status {
 }
 
 export enum UserRole {
-  teacher = 'teacher',
-  student = 'student',
+  teacher = 'Teacher',
+  student = 'Student',
 }
 
 export enum ErrorMessage {

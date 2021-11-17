@@ -25,6 +25,31 @@ export interface ISubject extends IBase {
   files: [IFile];
 }
 
+const replySchema = new Schema(
+  schemaBase({
+    content: {
+      type: String,
+    },
+  }),
+  {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  }
+);
+
+const postSchema = new Schema(
+  schemaBase({
+    content: {
+      type: String,
+    },
+    reply: {
+      type: [replySchema],
+    },
+  }),
+  {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  }
+);
+
 const fileSchema = new Schema({
   url: {
     type: String,
@@ -77,6 +102,9 @@ const subjectSchema = new Schema(
     class: {
       type: string,
       ref: 'Class',
+    },
+    post: {
+      type: [postSchema],
     },
     exercises: {
       type: [exerciseSchema],

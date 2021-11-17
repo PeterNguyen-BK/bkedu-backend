@@ -1,7 +1,7 @@
 import { IClass } from '@src/common/entity/class.entity';
 import { Status } from '@src/utils/constants';
 
-export interface ICreateStudent {
+export interface ICreateTeacher {
   first_name: string;
   last_name: string;
   email: string;
@@ -10,10 +10,9 @@ export interface ICreateStudent {
   birthday: Date;
   password: string;
   phone_number: string;
-  class: string;
 }
 
-export interface IUpdateStudent {
+export interface IUpdateTeacher {
   first_name: string;
   last_name: string;
   gender: string;
@@ -22,7 +21,7 @@ export interface IUpdateStudent {
   phone_number: string;
 }
 
-export interface IStudentResponse {
+export interface ITeacherResponse {
   _id: string;
   first_name: string;
   last_name: string;
@@ -32,7 +31,6 @@ export interface IStudentResponse {
   phone_number: string;
   status: Status;
   is_first_login: boolean;
-  class: IClass;
   created_at: Date;
   updated_at: Date;
   created_by: string;

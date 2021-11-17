@@ -46,7 +46,7 @@ module.exports = {
     'no-underscore-dangle': [
       2,
       {
-        allow: ['_id'],
+        allow: ['_id', '_doc'],
       },
     ],
     'no-param-reassign': [

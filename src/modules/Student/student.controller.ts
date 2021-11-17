@@ -5,12 +5,13 @@ import { errorHandler, successHandler } from '@src/common/services/response.serv
 import { IUpdateStudent } from './student.model';
 import { serializeStudent } from './student.serializer';
 
-export class UserController {
+export class StudentController {
   private studentService: StudentService = new StudentService(Student);
 
   public getAllStudents = async (req: Request, res: Response) => {
     try {
-      const result = await this.studentService.getAll();
+      const filter = req.query.classId ? { class: req.query.classId } : {};
+      const result = await this.studentService.getAll(filter);
       const serializeData = result.map((student: any) => serializeStudent(student));
       successHandler(req, res, serializeData, 'Get Successfully', 200);
     } catch (error) {

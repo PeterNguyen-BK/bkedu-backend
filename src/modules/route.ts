@@ -1,14 +1,22 @@
 import { Application } from 'express';
 import { AuthRoute } from './Authentication/auth.route';
-import { UserRoute } from './Student/student.route';
+import { ClassRoute } from './Class/class.route';
+import { StudentRoute } from './Student/student.route';
+import { TeacherRoute } from './Teacher/teacher.route';
 
 export class CombineRoute {
   private authRoute: AuthRoute = new AuthRoute();
 
-  private userRoute: UserRoute = new UserRoute();
+  private studentRoute: StudentRoute = new StudentRoute();
+
+  private teacherRoute: TeacherRoute = new TeacherRoute();
+
+  private classRoute: ClassRoute = new ClassRoute();
 
   public start(app: Application) {
     this.authRoute.route(app);
-    this.userRoute.route(app);
+    this.studentRoute.route(app);
+    this.teacherRoute.route(app);
+    this.classRoute.route(app);
   }
 }
