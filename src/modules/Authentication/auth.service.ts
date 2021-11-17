@@ -21,6 +21,7 @@ export class AuthService extends BaseRepository<IUser> {
         const { password, ...payload } = <IUser>user;
         const accessToken = jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '1h' });
         const refreshToken = jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, { expiresIn: '7d' });
+        await this.update({ is_first_login: true }, { _id: (<IUser>user)._id });
         return {
           access_token: accessToken,
           refresh_token: refreshToken,
