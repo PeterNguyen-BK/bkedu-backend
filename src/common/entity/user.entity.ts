@@ -20,23 +20,10 @@ export interface IUser extends IBase {
 
 const userSchema = new Schema(
   schemaBase({
-    first_name: {
-      type: String,
-    },
-    last_name: {
+    name: {
       type: String,
     },
     email: {
-      type: String,
-    },
-    gender: {
-      type: String,
-      enum: ['male', 'female'],
-    },
-    address: {
-      type: String,
-    },
-    birthday: {
       type: String,
     },
     password: {

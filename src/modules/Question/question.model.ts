@@ -1,6 +1,12 @@
 import { IAnswer, IOption } from '@src/common/entity/question.entity';
 import { QuestType } from '@src/utils/constants';
 
+export interface IQuestionCreate {
+  rating: number;
+  type: QuestType;
+  question: string;
+  answer: [IOption] | IAnswer;
+}
 export interface IQuestionResponse {
   _id: string;
   rating: number;
