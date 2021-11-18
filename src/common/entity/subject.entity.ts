@@ -17,10 +17,20 @@ export interface IExercise extends IBase {
   submit_file: [IFile];
 }
 
+export interface IReply extends IBase {
+  content: string;
+}
+
+export interface IPost extends IBase {
+  content: string;
+  reply: [IReply];
+}
+
 export interface ISubject extends IBase {
   name: string;
   teacher: string;
   class: string;
+  post: [IPost];
   exercises: [IExercise];
   files: [IFile];
 }
@@ -43,6 +53,7 @@ const postSchema = new Schema(
     },
     reply: {
       type: [replySchema],
+      default: [],
     },
   }),
   {
@@ -93,24 +104,27 @@ const exerciseSchema = new Schema<IExercise>({
 const subjectSchema = new Schema(
   schemaBase({
     name: {
-      type: string,
+      type: String,
     },
     teacher: {
       type: Schema.Types.ObjectId,
       ref: 'Teacher',
     },
     class: {
-      type: string,
+      type: Schema.Types.ObjectId,
       ref: 'Class',
     },
     post: {
       type: [postSchema],
+      default: [],
     },
     exercises: {
       type: [exerciseSchema],
+      default: [],
     },
     files: {
       type: [fileSchema],
+      default: [],
     },
   }),
   {
