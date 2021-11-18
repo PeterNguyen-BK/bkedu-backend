@@ -16,6 +16,7 @@ export interface IUser extends IBase {
   role: UserRole;
   status: Status;
   isFirstLogin: boolean;
+  refresh_token: string;
 }
 
 const userSchema = new Schema(
@@ -40,6 +41,9 @@ const userSchema = new Schema(
     is_first_login: {
       type: Boolean,
       default: false,
+    },
+    refresh_token: {
+      type: String,
     },
   }),
   {

@@ -21,7 +21,7 @@ export class AuthService extends BaseRepository<IUser> {
         const { password, ...payload } = <IUser>user;
         const accessToken = jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '1h' });
         const refreshToken = jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, { expiresIn: '7d' });
-        await this.update({ is_first_login: true }, { _id: (<IUser>user)._id });
+        await this.update({ is_first_login: true, refresh_token: refreshToken }, { _id: (<IUser>user)._id });
         return {
           access_token: accessToken,
           refresh_token: refreshToken,
@@ -31,5 +31,19 @@ export class AuthService extends BaseRepository<IUser> {
     } catch (error) {
       throw error;
     }
+  }
+
+  async refreshToken(refreshToken: any): Promise<any> {
+    const user = await this.userRepository.findOne({ refresh_token: refreshToken });
+    if (user) {
+      const { password, ...payload } = <IUser>user;
+      try {
+        await (<any>jwt.verify(refreshToken, `${process.env.REFRESH_TOKEN_SECRET}`));
+        const accessToken = jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, { expiresIn: '1h' });
+        return accessToken;
+      } catch (err) {
+        throw err;
+      }
+    } else return null;
   }
 }
