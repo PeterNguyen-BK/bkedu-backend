@@ -15,6 +15,7 @@ const classSchema = new Schema(
     },
     num_of_students: {
       type: Number,
+      default: 0,
     },
     form_teacher: {
       type: Schema.Types.ObjectId,

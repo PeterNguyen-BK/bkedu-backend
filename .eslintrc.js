@@ -33,7 +33,7 @@ module.exports = {
     'new-cap': [
       'error',
       {
-        newIsCapExceptions: ['entity'],
+        newIsCapExceptions: ['entity', 'studentRepository'],
       },
     ],
     indent: [
