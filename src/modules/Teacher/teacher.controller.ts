@@ -33,7 +33,7 @@ export class TeacherController {
         email: req.body.email,
       };
       const newUser = await this.teacherService.create(req.body, filter);
-      successHandler(req, res, newUser, 'Create New Student', 201);
+      successHandler(req, res, newUser, 'Create New Teacher', 201);
     } catch (error) {
       errorHandler(req, res, error);
     }
