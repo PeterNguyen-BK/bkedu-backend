@@ -63,6 +63,8 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'dot-location': [2, 'property'],
+    'dot-notation': 'off',
+    eqeqeq: 'off',
     'linebreak-style': 'off',
     'array-callback-return': 'off',
     camelcase: 'off',

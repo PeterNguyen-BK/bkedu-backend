@@ -19,7 +19,7 @@ const quizSchema = new Schema(
       required: true,
     },
     question_id: {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       required: true,
       ref: 'Question',
     },

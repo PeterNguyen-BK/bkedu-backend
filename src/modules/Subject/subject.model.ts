@@ -4,7 +4,7 @@ export interface IUpdateSubject {
   name: string;
   teacher: string;
   class: string;
-  post: [IPost];
+  posts: [IPost];
   exercises: [IExercise];
   files: [IFile];
 }
@@ -14,7 +14,7 @@ export interface ISubjectResponse {
   name: string;
   teacher: string;
   class: string;
-  post: [IPost];
+  posts: [IPost];
   exercises: [IExercise];
   files: [IFile];
   created_at: Date;

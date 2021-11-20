@@ -7,7 +7,7 @@ export function serializeSubject(model: any): ISubjectResponse | object {
       name: model.name,
       teacher: model.teacher,
       class: model.class,
-      post: model.post,
+      posts: model.posts,
       exercises: model.exercises,
       files: model.files,
       created_at: model.created_at,

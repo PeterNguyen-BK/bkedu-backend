@@ -1,20 +1,24 @@
-import { string } from 'joi';
 import { model, Schema } from 'mongoose';
 import { IBase, schemaBase } from './base.entity';
 import { schemaName } from './schemaName';
 
-export interface IFile {
+export interface IFile extends IBase {
+  original_name: string;
+  public_id: string;
   url: string;
-  upload_by: string;
-  upload_at: Date;
 }
 
-export interface IExercise extends IBase {
+export interface ISubmit extends IBase {
+  files: [IFile];
+  point?: number;
+}
+
+export interface IExercise {
   title: string;
   description?: string;
   deadline: Date;
   files?: [IFile];
-  submit_file: [IFile];
+  submits: [ISubmit];
 }
 
 export interface IReply extends IBase {
@@ -23,14 +27,14 @@ export interface IReply extends IBase {
 
 export interface IPost extends IBase {
   content: string;
-  reply: [IReply];
+  replies: [IReply];
 }
 
 export interface ISubject extends IBase {
   name: string;
   teacher: string;
   class: string;
-  post: [IPost];
+  posts: [IPost];
   exercises: [IExercise];
   files: [IFile];
 }
@@ -51,7 +55,7 @@ const postSchema = new Schema(
     content: {
       type: String,
     },
-    reply: {
+    replies: {
       type: [replySchema],
       default: [],
     },
@@ -61,24 +65,37 @@ const postSchema = new Schema(
   }
 );
 
-const fileSchema = new Schema({
-  url: {
-    type: String,
-    required: true,
-  },
-  upload_by: {
-    type: Schema.Types.ObjectId,
-    refPath: 'byUser',
-  },
-  byUser: {
-    type: String,
-    required: true,
-    enum: ['Student', 'Teacher'],
-  },
-  upload_at: {
-    type: Date,
-  },
-});
+const fileSchema = new Schema(
+  schemaBase({
+    original_name: {
+      type: String,
+    },
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  }),
+  {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  }
+);
+
+const submitSchema = new Schema(
+  schemaBase({
+    files: {
+      type: [fileSchema],
+      required: true,
+    },
+    point: {
+      type: Number,
+    },
+  }),
+  {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  }
+);
 
 const exerciseSchema = new Schema<IExercise>({
   title: {
@@ -93,11 +110,9 @@ const exerciseSchema = new Schema<IExercise>({
   },
   files: {
     type: [fileSchema],
-    required: true,
   },
-  submit_file: {
-    type: [fileSchema],
-    required: true,
+  submits: {
+    type: [submitSchema],
   },
 });
 
@@ -114,7 +129,7 @@ const subjectSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Class',
     },
-    post: {
+    posts: {
       type: [postSchema],
       default: [],
     },

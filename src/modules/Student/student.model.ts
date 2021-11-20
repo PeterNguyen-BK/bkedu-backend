@@ -11,6 +11,7 @@ export interface ICreateStudent {
 
 export interface IUpdateStudent {
   name: string;
+  password: string;
   phone_number: string;
 }
 

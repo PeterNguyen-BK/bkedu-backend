@@ -10,7 +10,8 @@ export class StudentController {
 
   public getAllStudents = async (req: Request, res: Response) => {
     try {
-      const filter = req.query.classId ? { class: req.query.classId } : {};
+      const filter: any = req.query.classId ? { class: req.query.classId } : {};
+      if (req.query.search) filter.$text = { $search: `"${req.query.search}"` };
       const result = await this.studentService.getAll(filter);
       const serializeData = result.map((student: any) => serializeStudent(student));
       successHandler(req, res, serializeData, 'Get Successfully', 200);

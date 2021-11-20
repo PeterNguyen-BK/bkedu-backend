@@ -34,6 +34,18 @@ export class SubjectController {
     }
   };
 
+  public getOneSubject = async (req: Request, res: Response) => {
+    try {
+      const filter: object = {
+        _id: req.params.id,
+      };
+      const result = await this.subjectService.getOne(filter);
+      successHandler(req, res, serializeSubject(result), 'Get Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
   public updateSubject = async (req: Request, res: Response) => {
     try {
       const filter: object = {
@@ -41,6 +53,61 @@ export class SubjectController {
       };
       const data: IUpdateSubject = req.body;
       const result = await this.subjectService.update(data, filter);
+      successHandler(req, res, result, 'Update Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
+  public addPost = async (req: Request, res: Response) => {
+    try {
+      const filter: object = {
+        _id: req.params.id,
+      };
+      const data = {
+        ...req.body,
+        created_by: (<any>req).authorizedUser._id,
+        updated_by: (<any>req).authorizedUser._id,
+      };
+
+      const result = await this.subjectService.addPost(data, filter);
+      successHandler(req, res, result, 'Add Post Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
+  public replyToPost = async (req: Request, res: Response) => {
+    try {
+      const filter: any = {
+        _id: req.params.id,
+        postId: req.params.postId,
+      };
+      const data = {
+        ...req.body,
+        created_by: (<any>req).authorizedUser._id,
+        updated_by: (<any>req).authorizedUser._id,
+      };
+      const result = await this.subjectService.replyToPost(data, filter);
+      successHandler(req, res, result, 'Update Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
+  public uploadFile = async (req: Request, res: Response) => {
+    try {
+      const filter: object = {
+        _id: req.params.id,
+      };
+      req.files = (<any[]>req.files).map((file: any) => {
+        return {
+          ...file,
+          created_by: (<any>req).authorizedUser._id,
+          updated_by: (<any>req).authorizedUser._id,
+        };
+      });
+      const result = await this.subjectService.uploadFile(req.files, filter);
       successHandler(req, res, result, 'Update Successfully', 200);
     } catch (error) {
       errorHandler(req, res, error);

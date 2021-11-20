@@ -1,4 +1,4 @@
-import { Document, SchemaDefinition } from 'mongoose';
+import { Document, SchemaDefinition, Schema } from 'mongoose';
 
 export interface IBase extends Document {
   _id: string;
@@ -16,10 +16,12 @@ export function schemaBase(schema: SchemaDefinition = {}) {
       default: false,
     },
     created_by: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
     updated_by: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   };
 

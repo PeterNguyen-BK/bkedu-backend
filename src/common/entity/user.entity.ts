@@ -15,7 +15,7 @@ export interface IUser extends IBase {
   phone_number: string;
   role: UserRole;
   status: Status;
-  isFirstLogin: boolean;
+  is_first_login: boolean;
   refresh_token: string;
 }
 
@@ -51,6 +51,8 @@ const userSchema = new Schema(
     discriminatorKey: 'role',
   }
 );
+
+userSchema.index({ name: 'text' });
 
 userSchema.pre('save', async function () {
   try {
