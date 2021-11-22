@@ -4,6 +4,8 @@ import { isAuthor } from '@src/middlewares/author.middleware';
 import { UserRole } from '@src/utils/constants';
 import { SubjectController } from './subject.controller';
 import { upload } from '@src/middlewares/upload.middleware';
+import { commonValidateBody } from '@src/middlewares/validate.middleware';
+import { replySchema } from './subject.DTO';
 
 export class SubjectRoute {
   private subjectController: SubjectController = new SubjectController();
@@ -24,6 +26,21 @@ export class SubjectRoute {
 
     app
       .route('/v1/subjects/:id/posts/:postId/reply')
-      .put(isAuthen, isAuthor(UserRole.teacher, UserRole.student), this.subjectController.replyToPost);
+      .put(
+        isAuthen,
+        isAuthor(UserRole.teacher, UserRole.student),
+        commonValidateBody(replySchema),
+        this.subjectController.replyToPost
+      );
+
+    app.route('/v1/subjects/:id/exercises').put(this.subjectController.addExercise);
+
+    app
+      .route('/v1/subjects/:id/exercises/:exerciseId')
+      .put(isAuthen, isAuthor(UserRole.teacher), upload().array('files'), this.subjectController.updateExercise);
+
+    app
+      .route('/v1/subjects/:id/exercises/:exerciseId/submit')
+      .put(isAuthen, isAuthor(UserRole.student), upload().array('files'), this.subjectController.submit);
   }
 }

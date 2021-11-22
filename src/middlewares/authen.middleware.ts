@@ -8,7 +8,7 @@ export const isAuthen = async (req: Request, res: Response, next: NextFunction) 
   const token: string = authHeader && authHeader.split(' ')[1];
   try {
     const decoded = <any>Jwt.verify(token, `${process.env.ACCESS_TOKEN_SECRET}`);
-    (<any>req).authenticatedUser = decoded._doc;
+    (<any>req).authenticatedUser = decoded;
     next();
   } catch (err) {
     errorHandler(req, res, ErrorMessage.UNAUTHORIZED, ErrorResponseCode.UNAUTHORIZED);

@@ -13,12 +13,12 @@ export interface ISubmit extends IBase {
   point?: number;
 }
 
-export interface IExercise {
+export interface IExercise extends IBase {
   title: string;
   description?: string;
-  deadline: Date;
+  deadline: string;
   files?: [IFile];
-  submits: [ISubmit];
+  submits?: [ISubmit];
 }
 
 export interface IReply extends IBase {
@@ -34,9 +34,9 @@ export interface ISubject extends IBase {
   name: string;
   teacher: string;
   class: string;
-  posts: [IPost];
-  exercises: [IExercise];
-  files: [IFile];
+  posts?: [IPost];
+  exercises?: [IExercise];
+  files?: [IFile];
 }
 
 const replySchema = new Schema(
@@ -97,26 +97,33 @@ const submitSchema = new Schema(
   }
 );
 
-const exerciseSchema = new Schema<IExercise>({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-  },
-  deadline: {
-    type: Date,
-  },
-  files: {
-    type: [fileSchema],
-  },
-  submits: {
-    type: [submitSchema],
-  },
-});
+const exerciseSchema = new Schema<IExercise>(
+  schemaBase({
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    deadline: {
+      type: String,
+    },
+    files: {
+      type: [fileSchema],
+      default: [],
+    },
+    submits: {
+      type: [submitSchema],
+      default: [],
+    },
+  }),
+  {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  }
+);
 
-const subjectSchema = new Schema(
+const subjectSchema = new Schema<ISubject>(
   schemaBase({
     name: {
       type: String,

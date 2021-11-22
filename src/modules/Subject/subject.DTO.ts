@@ -15,3 +15,7 @@ export const updateStudentSchema = Joi.object({
   exercises: Joi.array().items(Joi.object()),
   files: Joi.array().items(Joi.object()),
 });
+
+export const replySchema = Joi.object({
+  content: Joi.string().required(),
+});

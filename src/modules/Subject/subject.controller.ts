@@ -113,4 +113,54 @@ export class SubjectController {
       errorHandler(req, res, error);
     }
   };
+
+  public addExercise = async (req: Request, res: Response) => {
+    try {
+      const filter: object = {
+        _id: req.params.id,
+      };
+      const result = await this.subjectService.addExercise(req.body, filter);
+      successHandler(req, res, result, 'Add Exercise Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
+  public updateExercise = async (req: Request, res: Response) => {
+    try {
+      const filter: any = {
+        _id: req.params.id,
+        exerciseId: req.params.exerciseId,
+      };
+      req.files = (<any[]>req.files).map((file: any) => {
+        return {
+          ...file,
+          created_by: (<any>req).authorizedUser._id,
+          updated_by: (<any>req).authorizedUser._id,
+        };
+      });
+      const data = {
+        files: req.files,
+        ...req.body,
+      };
+      const result = await this.subjectService.updateExercise(data, filter);
+      successHandler(req, res, result, 'Update Exercise Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
+
+  public submit = async (req: Request, res: Response) => {
+    try {
+      const filter: any = {
+        _id: req.params.id,
+        exerciseId: req.params.exerciseId,
+        user: (<any>req).authorizedUser._id,
+      };
+      const result = await this.subjectService.submit(req.files, filter);
+      successHandler(req, res, result, 'Update Exercise Successfully', 200);
+    } catch (error) {
+      errorHandler(req, res, error);
+    }
+  };
 }

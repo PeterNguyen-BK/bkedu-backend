@@ -22,3 +22,9 @@ export interface ISubjectResponse {
   created_by: string;
   updated_by: string;
 }
+
+export interface ISubmitUpdate {
+  files: [IFile];
+  created_by: string;
+  updated_by: string;
+}

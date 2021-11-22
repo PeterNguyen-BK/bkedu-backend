@@ -32,7 +32,11 @@ export class ClassController {
       const filter: object = {
         email: req.body.email,
       };
-      const newClass = await this.classService.create(req.body, filter);
+      const data = {
+        ...req.body,
+        form_teacher: (<any>req).authorizedUser._id,
+      };
+      const newClass = await this.classService.create(data, filter);
       successHandler(req, res, newClass, 'Create New Class', 201);
     } catch (error) {
       errorHandler(req, res, error);
