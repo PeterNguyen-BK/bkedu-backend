@@ -16,7 +16,7 @@ export interface ISubmit extends IBase {
 export interface IExercise extends IBase {
   title: string;
   description?: string;
-  deadline: string;
+  deadline: Date;
   files?: [IFile];
   submits?: [ISubmit];
 }
@@ -107,7 +107,7 @@ const exerciseSchema = new Schema<IExercise>(
       type: String,
     },
     deadline: {
-      type: String,
+      type: Date,
     },
     files: {
       type: [fileSchema],
