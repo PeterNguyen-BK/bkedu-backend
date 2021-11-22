@@ -49,7 +49,11 @@ export class SubjectService extends BaseRepository<ISubject> {
         .populate('posts.replies.created_by', '_id email name phone_number role')
         .populate('posts.replies.updated_by', '_id email name phone_number role')
         .populate('files.created_by', '_id email name phone_number role')
-        .populate('files.updated_by', '_id email name phone_number role');
+        .populate('files.updated_by', '_id email name phone_number role')
+        .populate('exercises.files.created_by', '_id email name phone_number role')
+        .populate('exercises.files.updated_by', '_id email name phone_number role')
+        .populate('exercises.submits.created_by', '_id email name phone_number role')
+        .populate('exercises.submits.updated_by', '_id email name phone_number role');
       if (!subject) throw new AppError(ErrorMessage.NOT_FOUND, ErrorResponseCode.NOT_FOUND);
       return subject;
     } catch (error) {
