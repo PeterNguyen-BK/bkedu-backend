@@ -5,6 +5,7 @@ export function serializeStudent(model: any): IStudentResponse | object {
     return {
       _id: model._id,
       name: model.name,
+      email: model.email,
       phone_number: model.phone_number,
       status: model.status,
       is_first_login: model.is_first_login,

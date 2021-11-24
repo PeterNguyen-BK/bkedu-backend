@@ -4,11 +4,8 @@ export function serializeTeacher(model: any): ITeacherResponse | object {
   if (model) {
     return {
       _id: model._id,
-      first_name: model.first_name,
-      last_name: model.last_name,
-      gender: model.gender,
-      address: model.address,
-      birthday: model.birthday,
+      name: model.name,
+      email: model.email,
       phone_number: model.phone_number,
       status: model.status,
       is_first_login: model.is_first_login,
