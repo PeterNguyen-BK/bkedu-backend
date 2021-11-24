@@ -35,7 +35,7 @@ export class StudentController {
         email: req.body.email,
       };
       const newUser = await this.studentService.create(req.body, filter);
-      successHandler(req, res, newUser, 'Create New Student', 201);
+      successHandler(req, res, serializeStudent(newUser), 'Create New Student', 201);
     } catch (error) {
       errorHandler(req, res, error);
     }
@@ -48,7 +48,7 @@ export class StudentController {
       };
       const data: IUpdateStudent = req.body;
       const result = await this.studentService.update(data, filter);
-      successHandler(req, res, result, 'Update Successfully', 200);
+      successHandler(req, res, serializeStudent(result), 'Update Successfully', 200);
     } catch (error) {
       errorHandler(req, res, error);
     }
@@ -61,7 +61,7 @@ export class StudentController {
       };
       const data: IUpdateStudent = req.body;
       const result = await this.studentService.update(data, filter);
-      successHandler(req, res, result, 'Update Successfully', 200);
+      successHandler(req, res, { is_delete: true }, 'Delete Successfully', 200);
     } catch (error) {
       errorHandler(req, res, error);
     }
