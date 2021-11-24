@@ -1,9 +1,9 @@
 import Joi from 'joi';
 
 export const createTeacherSchema = Joi.object({
-  name: Joi.string(),
+  name: Joi.string().required(),
   email: Joi.string().required().email(),
-  password: Joi.string().min(6),
+  password: Joi.string().min(6).required(),
   phone_number: Joi.string().min(9).max(10),
 });
 
