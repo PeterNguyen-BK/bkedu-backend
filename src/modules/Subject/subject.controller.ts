@@ -26,7 +26,9 @@ export class SubjectController {
 
   public getAllSubject = async (req: Request, res: Response) => {
     try {
-      const filter: object = req.query ? { teacher: req.query.id } : {};
+      const filter: any = req.query.teacher ? { teacher: req.query.teacher } : {};
+      if (req.query.class) filter.class = req.query.class;
+      console.log(filter);
       const result = await this.subjectService.getAll(filter);
       const serializeData = result.map((subject: any) => serializeSubject(subject));
       successHandler(req, res, serializeData, 'Get Successfully', 200);
