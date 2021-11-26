@@ -30,7 +30,7 @@ export class ClassController {
   public createClass = async (req: Request, res: Response) => {
     try {
       const filter: object = {
-        class: req.body.name,
+        name: req.body.name,
       };
       const data = {
         ...req.body,
